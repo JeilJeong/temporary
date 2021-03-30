@@ -250,7 +250,7 @@
 "%-2s, %.s, %-4s, %-2.4s, %-8.12s, %3s, %8s, %---2s, %.*s, %.0s, %.1s, %.2s, %.4s, %.8s" // 1st '*' = 12, 2nd '*' = 18
 
 1c1
-< (null), (null), (null), (null), (null)  , (null),   (null), (null),   (null), (null), (null), (null), (null), (null) --- Return : 116
+< , , , (nul, (null)  , ,   , ,   , , (, (n, (nul, (null) --- Return : 55
 ---
 > (null), , (null), (nul, (null)  , (null),   (null), (null), (null), , (, (n, (nul, (null) --- Return : 89
 
