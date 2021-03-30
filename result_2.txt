@@ -1,0 +1,173 @@
+Test 180 (p_width_fit) : FAILED.
+    First line of code: {return test("%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);      expected output : "                                                           0x109315ee8                                                           0x109315ee9          "
+      your output     : "                                                           0x109315ee8                                                           0x109315e€e9         "
+      expected (nonprintable as hex) : "                                                           0x109315ee8                                                           0x109315ee9          "
+      actual   (nonprintable as hex) : "                                                           0x109315ee8                                                           0x109315e\x80e9         "
+
+Test 182 (p_width_16) : FAILED.
+    First line of code: {return test("%16p%16p%16p%16p%16p%16p%16p%16p%16p%16p%16p%16p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);      expected output : "     0x109315ee8     0x109315ee9     0x109315eea     0x109315eec     0x109315ef0     0x109315ef4     0x109315ef8     0x109315f00     0x109315f08     0"
+      your output     : "     0x109315e€e8     0x109315e€e9     0x109315e€hed¼ùaà0x     0x109315e€ec     0x109315e€f0     0x109315e€hfd¼ù4à0x     0x109315e€f8     0x109315f€"
+      expected (nonprintable as hex) : "     0x109315ee8     0x109315ee9     0x109315eea     0x109315eec     0x109315ef0     0x109315ef4     0x109315ef8     0x109315f00     0x109315f08     0"
+      actual   (nonprintable as hex) : "     0x109315e\x80e8     0x109315e\x80e9     0x109315e\x80hed\xbc\xf9\x07a\xe00x     0x109315e\x80ec     0x109315e\x80f0     0x109315e\x80hfd\xbc\xf9\x074\xe00x     0x109315e\x80f8     0x109315f\x80"
+
+Test 184 (p_width_32) : FAILED.
+    First line of code: {return test("%32p%32p%32p%32p%32p%32p%32p%32p%32p%32p%32p%32p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);      expected output : "                     0x109315ee8                     0x109315ee9                     0x109315eea                     0x109315eec                     0"
+      your output     : "                     0x109315ee8                     0x109315e€e9                     0x109315e€ea                     0x109315e€ec                   "
+      expected (nonprintable as hex) : "                     0x109315ee8                     0x109315ee9                     0x109315eea                     0x109315eec                     0"
+      actual   (nonprintable as hex) : "                     0x109315ee8                     0x109315e\x80e9                     0x109315e\x80ea                     0x109315e\x80ec                   "
+
+Test 185 (p_width_fit_lj) : FAILED.
+    First line of code: {return test("%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10      expected output : "0x109315ee8                                                           0x109315ee9                                                           0x109315ee"
+      your output     : "0x109315e€e8                                                           0x109315e€e9                                                           0x109315"
+      expected (nonprintable as hex) : "0x109315ee8                                                           0x109315ee9                                                           0x109315ee"
+      actual   (nonprintable as hex) : "0x109315e\x80e8                                                           0x109315e\x80e9                                                           0x109315"
+
+Test 187 (p_width_16_lj) : FAILED.
+    First line of code: {return test("%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10      expected output : "0x109315ee8     0x109315ee9     0x109315eea     0x109315eec     0x109315ef0     0x109315ef4     0x109315ef8     0x109315f00     0x109315f08     0x1093"
+      your output     : "0x109315ee8     0x109315e€e9     0x109315e€ea     0x109315e€ec     0x109315e€f0     0x109315e€f4     0x109315e€f8     0x109315f€00     0x109315f€08   "
+      expected (nonprintable as hex) : "0x109315ee8     0x109315ee9     0x109315eea     0x109315eec     0x109315ef0     0x109315ef4     0x109315ef8     0x109315f00     0x109315f08     0x1093"
+      actual   (nonprintable as hex) : "0x109315ee8     0x109315e\x80e9     0x109315e\x80ea     0x109315e\x80ec     0x109315e\x80f0     0x109315e\x80f4     0x109315e\x80f8     0x109315f\x8000     0x109315f\x8008   "
+
+Test 189 (p_width_32_lj) : FAILED.
+    First line of code: {return test("%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10      expected output : "0x109315ee8                     0x109315ee9                     0x109315eea                     0x109315eec                     0x109315ef0           "
+      your output     : "0x109315ee8                     0x109315e€e9                     0x109315e€ea                     0x109315e€ec                     0x109315e€f0       "
+      expected (nonprintable as hex) : "0x109315ee8                     0x109315ee9                     0x109315eea                     0x109315eec                     0x109315ef0           "
+      actual   (nonprintable as hex) : "0x109315ee8                     0x109315e\x80e9                     0x109315e\x80ea                     0x109315e\x80ec                     0x109315e\x80f0       "
+
+Test 589 (moul_d_8) : FAILED.
+    First line of code: {return test("%d", INT_MIN - 1);}
+      expected output : "2147483647"
+      your output     : "2147483€647"
+      expected (nonprintable as hex) : "2147483647"
+      actual   (nonprintable as hex) : "2147483\x80647"
+
+Test 600 (moul_i_6) : FAILED.
+    First line of code: {return test("%i", INT_MAX);}
+      expected output : "2147483647"
+      your output     : "2147483€647"
+      expected (nonprintable as hex) : "2147483647"
+      actual   (nonprintable as hex) : "2147483\x80647"
+
+Test 647 (moul_star_2) : FAILED.
+    First line of code: {return test("%% *.5i 42 == |% *.5i|
+", 4, 42);}
+      expected output : "% *.5i 42 == | 00042|
+"
+      your output     : "% *.5i 42 == |00042|
+"
+      expected (nonprintable as hex) : "% *.5i 42 == | 00042|\x0a"
+      actual   (nonprintable as hex) : "% *.5i 42 == |00042|\x0a"
+
+Test 657 (mix_test_6) : FAILED.
+    First line of code: {return test(
+      expected output : "  0x109305310    eb    42    G    Hello, World!    235  "
+      your output     : "  0x1093053€10    eb    42    G    Hello, World!    235  "
+      expected (nonprintable as hex) : "  0x109305310    eb    42    G    Hello, World!    235  "
+      actual   (nonprintable as hex) : "  0x1093053\x8010    eb    42    G    Hello, World!    235  "
+
+Test 676 (mix_test_25) : FAILED.
+    First line of code: {return test(
+    SEGFAULT
+
+Test 683 (mix_test_32) : FAILED.
+    First line of code: {return test(
+      expected output : "  eb    EB    0x109305310    Hello, World!    42    G  "
+      your output     : "  eb    EB    0x1093053€10    Hello, World!    42    G  "
+      expected (nonprintable as hex) : "  eb    EB    0x109305310    Hello, World!    42    G  "
+      actual   (nonprintable as hex) : "  eb    EB    0x1093053\x8010    Hello, World!    42    G  "
+
+Test 686 (mix_test_35) : FAILED.
+    First line of code: {return test(
+      expected output : "  0x109305310    235    Hello, World!    EB    G    0x109305310  "
+      your output     : "  0x109305310    235    Hello, World!    EB    G    0x109393053005310  "
+      expected (nonprintable as hex) : "  0x109305310    235    Hello, World!    EB    G    0x109305310  "
+      actual   (nonprintable as hex) : "  0x109305310    235    Hello, World!    EB    G    0x109393053005310  "
+
+Test 690 (mix_test_39) : FAILED.
+    First line of code: {return test(
+      expected output : "  0x109305310    42    eb    %    235    EB  "
+      your output     : "  0x1093053€10    42    eb    %    235    EB  "
+      expected (nonprintable as hex) : "  0x109305310    42    eb    %    235    EB  "
+      actual   (nonprintable as hex) : "  0x1093053\x8010    42    eb    %    235    EB  "
+
+Test 705 (mix_test_54) : FAILED.
+    First line of code: {return test(
+      expected output : "  0x109305310    235    G    Hello, World!    42    0x109305310  "
+      your output     : "  0x109305310    235    G    Hello, World!    42    0x109393053005310  "
+      expected (nonprintable as hex) : "  0x109305310    235    G    Hello, World!    42    0x109305310  "
+      actual   (nonprintable as hex) : "  0x109305310    235    G    Hello, World!    42    0x109393053005310  "
+
+Test 710 (mix_test_59) : FAILED.
+    First line of code: {return test(
+      expected output : "  G    42    Hello, World!    235    eb    0x109305310  "
+      your output     : "  G    42    Hello, World!    235    eb    0x1093053€10  "
+      expected (nonprintable as hex) : "  G    42    Hello, World!    235    eb    0x109305310  "
+      actual   (nonprintable as hex) : "  G    42    Hello, World!    235    eb    0x1093053\x8010  "
+
+Test 725 (mix_test_74) : FAILED.
+    First line of code: {return test(
+      expected output : "  0x109305310    G    Hello, World!    235    42    eb  "
+      your output     : "  0x1093053€10    G    Hello, World!    235    42    eb  "
+      expected (nonprintable as hex) : "  0x109305310    G    Hello, World!    235    42    eb  "
+      actual   (nonprintable as hex) : "  0x1093053\x8010    G    Hello, World!    235    42    eb  "
+
+Test 735 (mix_test_84) : FAILED.
+    First line of code: {return test(
+      expected output : "  0x109305310    eb    G    Hello, World!    235    0x109305310  "
+      your output     : "  0x109305310    eb    G    Hello, World!    235    0x109393053005310  "
+      expected (nonprintable as hex) : "  0x109305310    eb    G    Hello, World!    235    0x109305310  "
+      actual   (nonprintable as hex) : "  0x109305310    eb    G    Hello, World!    235    0x109393053005310  "
+
+Test 736 (mix_test_85) : FAILED.
+    First line of code: {return test(
+    SEGFAULT
+
+Test 737 (mix_test_86) : FAILED.
+    First line of code: {return test(
+      expected output : "  0x109305310    G    235    EB    Hello, World!    0x109305310  "
+      your output     : "  0x109305310    G    235    EB    Hello, World!    0x109393053005310  "
+      expected (nonprintable as hex) : "  0x109305310    G    235    EB    Hello, World!    0x109305310  "
+      actual   (nonprintable as hex) : "  0x109305310    G    235    EB    Hello, World!    0x109393053005310  "
+
+Test 743 (mix_test_92) : FAILED.
+    First line of code: {return test(
+      expected output : "  G    0x109305310    EB    eb    %    Hello, World!  "
+      your output     : "  G    0x1093053€10    EB    eb    %    Hello, World!  "
+      expected (nonprintable as hex) : "  G    0x109305310    EB    eb    %    Hello, World!  "
+      actual   (nonprintable as hex) : "  G    0x1093053\x8010    EB    eb    %    Hello, World!  "
+
+Test 746 (mix_test_95) : FAILED.
+    First line of code: {return test(
+      expected output : "  %    42    eb    0x109305310    G    Hello, World!  "
+      your output     : "  %    42    eb    0x1093053€10    G    Hello, World!  "
+      expected (nonprintable as hex) : "  %    42    eb    0x109305310    G    Hello, World!  "
+      actual   (nonprintable as hex) : "  %    42    eb    0x1093053\x8010    G    Hello, World!  "
+
+Test 4192 (notintsubject_o_neg_prec_star_01) : FAILED.
+    First line of code: {return test("%.*o", -3, 12345);}
+      expected output : "30071"
+      your output     : "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      expected (nonprintable as hex) : "30071"
+      actual   (nonprintable as hex) : "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+
+Test 4193 (notintsubject_o_neg_prec_star_02) : FAILED.
+    First line of code: {return test("%.*o", -1, 12345);}
+      expected output : "30071"
+      your output     : "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      expected (nonprintable as hex) : "30071"
+      actual   (nonprintable as hex) : "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+
+Test 4194 (notintsubject_o_neg_prec_star_03) : FAILED.
+    First line of code: {return test("%.*o", -1, 0);}
+      expected output : "0"
+      your output     : "147e5e6c"
+      expected (nonprintable as hex) : "0"
+      actual   (nonprintable as hex) : "147e5e6c"
+
+Test 4203 (p_neg_prec_star_01) : FAILED.
+    First line of code: {return test("%.*p", -3, s_hello);}
+      expected output : "0x1092d843e"
+      your output     : "0x1092d84€3e"
+      expected (nonprintable as hex) : "0x1092d843e"
+      actual   (nonprintable as hex) : "0x1092d84\x803e"
+
