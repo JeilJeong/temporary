@@ -1,0 +1,382 @@
+WARNING: The return values reported here may be bugged on some systems.
+          See https://github.com/gavinfielder/pft/issues/11
+          Run in non-fork mode (-X) to ensure accurate return value
+          reporting, set IGNORE_RETURN_VALUE=1 in options-config.ini,
+          or run test_pipes.sh to see if your system has this bug.
+          This bug does not affect the pass/fail result of a test, nor
+          the function output--only the reported return value.
+
+
+Test  11 (nocrash_nullspec_basic) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%");}
+    SEGFAULT
+
+Test  12 (nocrash_nullspec_5w) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%5");}
+    SEGFAULT
+
+Test  13 (nocrash_nullspec_5wzp) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%05");}
+    SEGFAULT
+
+Test  14 (nocrash_nullspec_5wzplj) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%-05");}
+    SEGFAULT
+
+Test  15 (nocrash_nullspec_5wlj) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%-5");}
+    SEGFAULT
+
+Test 142 (i_intmax) : FAILED.
+    First line of code: {return test("%i",  2147483647);}
+      expected return value : 11
+      your return value     : 12
+      expected output : "2147483647"
+      your output     : "2147483‡647"
+      expected (nonprintable as hex) : "2147483647"
+      actual   (nonprintable as hex) : "2147483\xe0647"
+
+Test 221 (d_intmin) : FAILED.
+    First line of code: {return test("%d", (int)(-2147483678));}
+      expected return value : 11
+      your return value     : 12
+      expected output : "2147483618"
+      your output     : "2147483‡618"
+      expected (nonprintable as hex) : "2147483618"
+      actual   (nonprintable as hex) : "2147483\xe0618"
+
+Test 339 (x_hexlmax) : FAILED.
+    First line of code: {return test("%x", 4294967295u);}
+      expected return value : 8
+      your return value     : 9
+      expected output : "ffffffff"
+      your output     : "fffffff‡f"
+      expected (nonprintable as hex) : "ffffffff"
+      actual   (nonprintable as hex) : "fffffff\xe0f"
+
+Test 430 (p_void_width_fit) : FAILED.
+    First line of code: {return test("%5.p", NULL);}
+      expected return value : 5
+      your return value     : 7
+      expected output : "   0x"
+      your output     : "     0x"
+      expected (nonprintable as hex) : "   0x"
+      actual   (nonprintable as hex) : "     0x"
+
+Test 431 (p_void_width_nofit) : FAILED.
+    First line of code: {return test("%2.p", NULL);}
+      expected return value : 2
+      your return value     : 4
+      expected output : "0x"
+      your output     : "  0x"
+      expected (nonprintable as hex) : "0x"
+      actual   (nonprintable as hex) : "  0x"
+
+Test 433 (p_ftfc_literal_2w_prec9_undefbehav) : FAILED.
+    First line of code: {return test("%2.9p
+", 1234);}
+      expected return value : 13
+      your return value     : 14
+      expected output : "0x0000004d2
+"
+      your output     : "0x0000004‡d2
+"
+      expected (nonprintable as hex) : "0x0000004d2\x0a"
+      actual   (nonprintable as hex) : "0x0000004\xe0d2\x0a"
+
+Test 438 (p_width_fit) : FAILED.
+    First line of code: {return test("%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);      expected return value : 1012
+      your return value     : 1052
+      expected output : "                                                           0x10ba564e8                                                           0x10ba564e9          "
+      your output     : "                                                           0x10ba564‡e8                                                           0x10ba564‡e9        "
+      expected (nonprintable as hex) : "                                                           0x10ba564e8                                                           0x10ba564e9          "
+      actual   (nonprintable as hex) : "                                                           0x10ba564\xe0e8                                                           0x10ba564\xe0e9        "
+
+Test 440 (p_width_16) : FAILED.
+    First line of code: {return test("%16p%16p%16p%16p%16p%16p%16p%16p%16p%16p%16p%16p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);      expected return value : 222
+      your return value     : 245
+      expected output : "     0x10ba564e8     0x10ba564e9     0x10ba564ea     0x10ba564ec     0x10ba564f0     0x10ba564f4     0x10ba564f8     0x10ba56500     0x10ba56508     0"
+      your output     : "     0x10ba564e8     0x10ba564‡e9     0x10ba564‡ea     0x10ba564‡ec     0x10ba564‡f0     0x10ba564‡f4     0x10ba564‡f8     0x10ba565‡00     0x10ba565‡"
+      expected (nonprintable as hex) : "     0x10ba564e8     0x10ba564e9     0x10ba564ea     0x10ba564ec     0x10ba564f0     0x10ba564f4     0x10ba564f8     0x10ba56500     0x10ba56508     0"
+      actual   (nonprintable as hex) : "     0x10ba564e8     0x10ba564\xe0e9     0x10ba564\xe0ea     0x10ba564\xe0ec     0x10ba564\xe0f0     0x10ba564\xe0f4     0x10ba564\xe0f8     0x10ba565\xe000     0x10ba565\xe0"
+
+Test 441 (p_width_8) : FAILED.
+    First line of code: {return test("%8p%8p%8p%8p%8p%8p%8p%8p%8p%8p%8p%8p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);}
+      expected return value : 156
+      your return value     : 157
+      expected output : "0x10ba564e80x10ba564e90x10ba564ea0x10ba564ec0x10ba564f00x10ba564f40x10ba564f80x10ba565000x10ba565080x10ba565100x10ba565180x10ba56520"
+      your output     : "0x10ba564‡e80x10ba564e90x10ba564ea0x10ba564ec0x10ba564f00x10ba564f40x10ba564f80x10ba565000x10ba565080x10ba565100x10ba565180x10ba56520"
+      expected (nonprintable as hex) : "0x10ba564e80x10ba564e90x10ba564ea0x10ba564ec0x10ba564f00x10ba564f40x10ba564f80x10ba565000x10ba565080x10ba565100x10ba565180x10ba56520"
+      actual   (nonprintable as hex) : "0x10ba564\xe0e80x10ba564e90x10ba564ea0x10ba564ec0x10ba564f00x10ba564f40x10ba564f80x10ba565000x10ba565080x10ba565100x10ba565180x10ba56520"
+
+Test 442 (p_width_32) : FAILED.
+    First line of code: {return test("%32p%32p%32p%32p%32p%32p%32p%32p%32p%32p%32p%32p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);      expected return value : 455
+      your return value     : 467
+      expected output : "                     0x10ba564e8                     0x10ba564e9                     0x10ba564ea                     0x10ba564ec                     0"
+      your output     : "                     0x10ba564e8                     0x10ba564‡e9                     0x10ba564‡ea                     0x10ba564‡ec                   "
+      expected (nonprintable as hex) : "                     0x10ba564e8                     0x10ba564e9                     0x10ba564ea                     0x10ba564ec                     0"
+      actual   (nonprintable as hex) : "                     0x10ba564e8                     0x10ba564\xe0e9                     0x10ba564\xe0ea                     0x10ba564\xe0ec                   "
+
+Test 443 (p_width_fit_lj) : FAILED.
+    First line of code: {return test("%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10      expected return value : 1012
+      your return value     : 1069
+      expected output : "0x10ba564e8                                                           0x10ba564e9                                                           0x10ba564e"
+      your output     : "0x10ba564‡e8                                                           0x10ba564‡e9                                                           0x10ba56"
+      expected (nonprintable as hex) : "0x10ba564e8                                                           0x10ba564e9                                                           0x10ba564e"
+      actual   (nonprintable as hex) : "0x10ba564\xe0e8                                                           0x10ba564\xe0e9                                                           0x10ba56"
+
+Test 445 (p_width_16_lj) : FAILED.
+    First line of code: {return test("%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10      expected return value : 222
+      your return value     : 255
+      expected output : "0x10ba564e8     0x10ba564e9     0x10ba564ea     0x10ba564ec     0x10ba564f0     0x10ba564f4     0x10ba564f8     0x10ba56500     0x10ba56508     0x10ba"
+      your output     : "0x10ba564‡e8     0x10ba564‡e9     0x10ba564‡deLê˘a`0x     0x10ba564‡ec     0x10ba564‡f0     0x10ba564‡f4     0x10ba564‡f8     0x10ba565‡00     0x10ba"
+      expected (nonprintable as hex) : "0x10ba564e8     0x10ba564e9     0x10ba564ea     0x10ba564ec     0x10ba564f0     0x10ba564f4     0x10ba564f8     0x10ba56500     0x10ba56508     0x10ba"
+      actual   (nonprintable as hex) : "0x10ba564\xe0e8     0x10ba564\xe0e9     0x10ba564\xe0deL\x90\xf9\x07a`0x     0x10ba564\xe0ec     0x10ba564\xe0f0     0x10ba564\xe0f4     0x10ba564\xe0f8     0x10ba565\xe000     0x10ba"
+
+Test 447 (p_width_32_lj) : FAILED.
+    First line of code: {return test("%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10      expected return value : 455
+      your return value     : 514
+      expected output : "0x10ba564e8                     0x10ba564e9                     0x10ba564ea                     0x10ba564ec                     0x10ba564f0           "
+      your output     : "0x10ba564‡e8                     0x10ba564‡e9                     0x10ba564‡deLê˘a`0x                     0x10ba564‡ec                     0x10ba564‡"
+      expected (nonprintable as hex) : "0x10ba564e8                     0x10ba564e9                     0x10ba564ea                     0x10ba564ec                     0x10ba564f0           "
+      actual   (nonprintable as hex) : "0x10ba564\xe0e8                     0x10ba564\xe0e9                     0x10ba564\xe0deL\x90\xf9\x07a`0x                     0x10ba564\xe0ec                     0x10ba564\xe0"
+
+Test 479 (nocrash_noarg_1_notmandatory) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%1$"); }
+    SEGFAULT
+
+Test 480 (nocrash_noarg_2_notmandatory) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%0"); }
+    SEGFAULT
+
+Test 481 (nocrash_noarg_3_notmandatory) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("% "); }
+    SEGFAULT
+
+Test 482 (nocrash_noarg_4_notmandatory) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%#"); }
+    SEGFAULT
+
+Test 483 (nocrash_noarg_5_notmandatory) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%-"); }
+    SEGFAULT
+
+Test 484 (nocrash_noarg_6_notmandatory) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%+"); }
+    SEGFAULT
+
+Test 485 (nocrash_noarg_9_notmandatory) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%23"); }
+    SEGFAULT
+
+Test 486 (nocrash_noarg_10_notmandatory) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%."); }
+    SEGFAULT
+
+Test 487 (nocrash_noarg_11_notmandatory) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%hh"); }
+    SEGFAULT
+
+Test 488 (nocrash_noarg_12_notmandatory) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%h"); }
+    SEGFAULT
+
+Test 489 (nocrash_noarg_13_notmandatory) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%ll"); }
+    SEGFAULT
+
+Test 490 (nocrash_noarg_14_notmandatory) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%l"); }
+    SEGFAULT
+
+Test 491 (nocrash_noarg_15_notmandatory) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%L"); }
+    SEGFAULT
+
+Test 497 (nocrash_noarg_22_notmandatory) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%f"); }
+    SEGFAULT
+
+Test 499 (nocrash_noarg_25_notmandatory) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%o"); }
+    SEGFAULT
+
+Test 615 (nocrash_mandatory_f_size_hh) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%hhf", 42.5);}
+    SEGFAULT
+
+Test 616 (nocrash_mandatory_f_size_h) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%hf", 42.5);}
+    SEGFAULT
+
+Test 617 (nocrash_mandatory_f_size_ll) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%llf", 42.5);}
+    SEGFAULT
+
+Test 618 (nocrash_mandatory_f_size_lll) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%lllf", 42.5);}
+    SEGFAULT
+
+Test 619 (nocrash_mandatory_f_size_llll) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%llllf", 42.5);}
+    SEGFAULT
+
+Test 620 (nocrash_mandatory_f_size_LL) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%LLf", 42.5);}
+    SEGFAULT
+
+Test 621 (nocrash_mandatory_f_size_Ll) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%Llf", 42.5);}
+    SEGFAULT
+
+Test 622 (nocrash_mandatory_f_size_lL) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%lLf", 42.5);}
+    SEGFAULT
+
+Test 623 (nocrash_mandatory_f_lj_nowidth) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%-f", 42.5);}
+    SEGFAULT
+
+Test 635 (moul_d_7) : FAILED.
+    First line of code: {return test("%d", INT_MIN);}
+      expected return value : 12
+      your return value     : 13
+      expected output : "-2147483648"
+      your output     : "-2147483‡648"
+      expected (nonprintable as hex) : "-2147483648"
+      actual   (nonprintable as hex) : "-2147483\xe0648"
+
+Test 637 (moul_d_9) : FAILED.
+    First line of code: {return test("%d", INT_MAX + 1);}
+      expected return value : 12
+      your return value     : 13
+      expected output : "-2147483648"
+      your output     : "-2147483‡648"
+      expected (nonprintable as hex) : "-2147483648"
+      actual   (nonprintable as hex) : "-2147483\xe0648"
+
+Test 676 (moul_i_6) : FAILED.
+    First line of code: {return test("%i", INT_MAX);}
+      expected return value : 11
+      your return value     : 12
+      expected output : "2147483647"
+      your output     : "2147483‡647"
+      expected (nonprintable as hex) : "2147483647"
+      actual   (nonprintable as hex) : "2147483\xe0647"
+
+Test 678 (moul_i_8) : FAILED.
+    First line of code: {return test("%i", INT_MIN - 1);}
+      expected return value : 11
+      your return value     : 12
+      expected output : "2147483647"
+      your output     : "2147483‡647"
+      expected (nonprintable as hex) : "2147483647"
+      actual   (nonprintable as hex) : "2147483\xe0647"
+
+Test 679 (moul_i_9) : FAILED.
+    First line of code: {return test("%i", INT_MAX + 1);}
+      expected return value : 12
+      your return value     : 13
+      expected output : "-2147483648"
+      your output     : "-2147483‡648"
+      expected (nonprintable as hex) : "-2147483648"
+      actual   (nonprintable as hex) : "-2147483\xe0648"
+
+Test 685 (moul_u_3) : FAILED.
+    First line of code: {return test("Il fait au moins %u
+", -8000);}
+      expected return value : 30
+      your return value     : 31
+      expected output : "Il fait au moins 4294959296
+"
+      your output     : "Il fait au moins 4294959‡296
+"
+      expected (nonprintable as hex) : "Il fait au moins 4294959296\x0a"
+      actual   (nonprintable as hex) : "Il fait au moins 4294959\xe0296\x0a"
+
+Test 689 (moul_u_7) : FAILED.
+    First line of code: {return test("%u", INT_MIN);}
+      expected return value : 11
+      your return value     : 12
+      expected output : "2147483648"
+      your output     : "2147483‡648"
+      expected (nonprintable as hex) : "2147483648"
+      actual   (nonprintable as hex) : "2147483\xe0648"
+
+Test 691 (moul_u_9) : FAILED.
+    First line of code: {return test("%u", INT_MAX + 1);}
+      expected return value : 11
+      your return value     : 12
+      expected output : "2147483648"
+      your output     : "2147483‡648"
+      expected (nonprintable as hex) : "2147483648"
+      actual   (nonprintable as hex) : "2147483\xe0648"
+
+Test 700 (moul_x_6) : FAILED.
+    First line of code: {return test("%x", INT_MAX);}
+      expected return value : 8
+      your return value     : 9
+      expected output : "7fffffff"
+      your output     : "7ffffff‡f"
+      expected (nonprintable as hex) : "7fffffff"
+      actual   (nonprintable as hex) : "7ffffff\xe0f"
+
+Test 701 (moul_x_7) : FAILED.
+    First line of code: {return test("%x", INT_MIN);}
+      expected return value : 8
+      your return value     : 9
+      expected output : "80000000"
+      your output     : "8000000‡0"
+      expected (nonprintable as hex) : "80000000"
+      actual   (nonprintable as hex) : "8000000\xe00"
+
+Test 703 (moul_x_9) : FAILED.
+    First line of code: {return test("%x", INT_MAX + 1);}
+      expected return value : 8
+      your return value     : 9
+      expected output : "80000000"
+      your output     : "8000000‡0"
+      expected (nonprintable as hex) : "80000000"
+      actual   (nonprintable as hex) : "8000000\xe00"
+
+Test 716 (moul_leftjusty_2) : FAILED.
+    First line of code: {return test("%%-d 42 == %-d
+", INT_MIN);}
+      expected return value : 24
+      your return value     : 25
+      expected output : "%-d 42 == -2147483648
+"
+      your output     : "%-d 42 == -2147483‡648
+"
+      expected (nonprintable as hex) : "%-d 42 == -2147483648\x0a"
+      actual   (nonprintable as hex) : "%-d 42 == -2147483\xe0648\x0a"
+
